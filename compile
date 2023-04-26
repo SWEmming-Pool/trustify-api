@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Compilazione contratti"
 
 contract_path="src/main/java/com/swemmingpool/contracts/"
