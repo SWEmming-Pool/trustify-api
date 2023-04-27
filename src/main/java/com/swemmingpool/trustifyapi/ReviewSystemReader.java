@@ -5,7 +5,6 @@ import org.bouncycastle.util.encoders.Hex;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
-import org.web3j.abi.datatypes.Address;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.ReadonlyTransactionManager;
@@ -13,6 +12,8 @@ import org.web3j.tx.gas.DefaultGasProvider;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import static java.util.Objects.requireNonNull;
 
 @Service
 public class ReviewSystemReader {
@@ -37,7 +38,18 @@ public class ReviewSystemReader {
     }
     return jsonReviews;
   }
-  public JSONArray getReviewForAddress(String address, AddressType type) throws Exception{
+  public JSONArray getReviewForAddress(String address, AddressType type) throws Exception {
+    requireNonNull(address, "Address cannot be null");
+    requireNonNull(type, "Address type cannot be null");
+
+    if(!address.matches("^0x[a-fA-F0-9]{40}$")) {
+      throw new IllegalArgumentException("Address is not a valid Ethereum address");
+    }
+
+    if(type!=AddressType.SENDER && type!=AddressType.RECEIVER) {
+      throw new IllegalArgumentException("Address type is not valid");
+    }
+
     ArrayList<Review> reviewArrayList;
     switch (type) {
       case SENDER -> {
