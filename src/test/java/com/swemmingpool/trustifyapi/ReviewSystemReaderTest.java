@@ -97,15 +97,15 @@ public class ReviewSystemReaderTest {
   public void setUp() throws Exception {
 
     nullListReader = Mockito.mock(ReviewSystemReader.class);
-    when(nullListReader.getReviewForAddress(Mockito.anyString(), Mockito.any(AddressType.class)))
+    when(nullListReader.getReviewByAddress(Mockito.anyString(), Mockito.any(AddressType.class)))
         .thenReturn(nullList);
 
     emptyListReader = Mockito.mock(ReviewSystemReader.class);
-    when(emptyListReader.getReviewForAddress(Mockito.anyString(), Mockito.any(AddressType.class)))
+    when(emptyListReader.getReviewByAddress(Mockito.anyString(), Mockito.any(AddressType.class)))
         .thenReturn(emptyList);
 
     normalListReader = Mockito.mock(ReviewSystemReader.class);
-    when(normalListReader.getReviewForAddress(Mockito.anyString(), Mockito.any(AddressType.class)))
+    when(normalListReader.getReviewByAddress(Mockito.anyString(), Mockito.any(AddressType.class)))
         .thenReturn(validList);
   }
 
@@ -117,7 +117,7 @@ public class ReviewSystemReaderTest {
 
     NullPointerException exc = assertThrows(
         NullPointerException.class,
-        () -> normalListReader.getReviewForAddress(null, AddressType.RECEIVER)
+        () -> normalListReader.getReviewByAddress(null, AddressType.RECEIVER)
     );
 
     assertEquals("Address cannot be null", exc.getMessage());
@@ -131,7 +131,7 @@ public class ReviewSystemReaderTest {
 
     NullPointerException exc = assertThrows(
         NullPointerException.class,
-        () -> normalListReader.getReviewForAddress(null, AddressType.SENDER)
+        () -> normalListReader.getReviewByAddress(null, AddressType.SENDER)
     );
 
     assertEquals("Address cannot be null", exc.getMessage());
@@ -145,7 +145,7 @@ public class ReviewSystemReaderTest {
 
     NullPointerException exc = assertThrows(
         NullPointerException.class,
-        () -> normalListReader.getReviewForAddress("0xe35d534EBe71555191CB3ce09D7accEE8663444E", null)
+        () -> normalListReader.getReviewByAddress("0xe35d534EBe71555191CB3ce09D7accEE8663444E", null)
     );
 
     assertEquals("Address type cannot be null", exc.getMessage());
@@ -159,7 +159,7 @@ public class ReviewSystemReaderTest {
 
     IllegalArgumentException exc = assertThrows(
         IllegalArgumentException.class,
-        () -> normalListReader.getReviewForAddress("abc", AddressType.RECEIVER)
+        () -> normalListReader.getReviewByAddress("abc", AddressType.RECEIVER)
     );
 
     assertEquals("Address is not a valid Ethereum address", exc.getMessage());
@@ -173,7 +173,7 @@ public class ReviewSystemReaderTest {
 
     IllegalArgumentException exc = assertThrows(
         IllegalArgumentException.class,
-        () -> normalListReader.getReviewForAddress("xyz", AddressType.SENDER)
+        () -> normalListReader.getReviewByAddress("xyz", AddressType.SENDER)
     );
 
     assertEquals("Address is not a valid Ethereum address", exc.getMessage());
@@ -182,7 +182,7 @@ public class ReviewSystemReaderTest {
 
   @Test
   public void testGetReviewForAddressOnReceiverNullList() throws Exception {
-    JSONArray reviewForAddress = nullListReader.getReviewForAddress(
+    JSONArray reviewForAddress = nullListReader.getReviewByAddress(
         "0xe35d534EBe71555191CB3ce09D7accEE8663444E",
         AddressType.RECEIVER);
 
@@ -191,7 +191,7 @@ public class ReviewSystemReaderTest {
 
   @Test
   public void testGetReviewForAddressOnSenderNullList() throws Exception {
-    JSONArray reviewForAddress = nullListReader.getReviewForAddress(
+    JSONArray reviewForAddress = nullListReader.getReviewByAddress(
         "0xe35d534EBe71555191CB3ce09D7accEE8663444E",
         AddressType.SENDER);
 
@@ -200,7 +200,7 @@ public class ReviewSystemReaderTest {
 
   @Test
   public void testGetReviewForAddressOnReceiverEmptyList() throws Exception {
-    JSONArray reviewForAddress = emptyListReader.getReviewForAddress(
+    JSONArray reviewForAddress = emptyListReader.getReviewByAddress(
         "0xe35d534EBe71555191CB3ce09D7accEE8663444E",
         AddressType.RECEIVER);
 
@@ -209,7 +209,7 @@ public class ReviewSystemReaderTest {
 
   @Test
   public void testGetReviewForAddressOnSenderEmptyList() throws Exception {
-    JSONArray reviewForAddress = emptyListReader.getReviewForAddress(
+    JSONArray reviewForAddress = emptyListReader.getReviewByAddress(
         "0xe35d534EBe71555191CB3ce09D7accEE8663444E",
         AddressType.SENDER);
 

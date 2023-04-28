@@ -20,12 +20,12 @@ public class ReviewSystemController {
   }
 
   @GetMapping(value = "/reviews/{address}")
-  public JSONArray getReviewsForReceiver(@PathVariable String address) throws Exception {
-    return reviewSystemReader.getReviewForAddress(address, AddressType.RECEIVER);
+  public JSONArray getReviewsByReceiver(@PathVariable String address) throws Exception {
+    return reviewSystemReader.getReviewByAddress(address, AddressType.RECEIVER);
   }
 
   @GetMapping(value = "/reviews/sender/{address}")
   public JSONArray getReviewsBySender(@PathVariable String address) throws Exception {
-    return reviewSystemReader.getReviewForAddress(address, AddressType.SENDER);
+    return reviewSystemReader.getReviewByAddress(address, AddressType.SENDER);
   }
 }

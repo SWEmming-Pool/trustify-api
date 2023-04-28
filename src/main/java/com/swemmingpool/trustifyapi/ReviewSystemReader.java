@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
 @Service
 public class ReviewSystemReader {
   private final static String ACCOUNT_ADDRESS = "0xe35d534EBe71555191CB3ce09D7accEE8663444E";
-  private final static String CONTRACT_ADDRESS = "0x3297bc571f9420DcbD671bdFE98A48F07604B272";
+  private final static String CONTRACT_ADDRESS = "0xF16a40c5C0dE254dFf3BFA40F4a5C99f908f9aBa";
   // Infura RPC node
   private final static Web3j CLIENT = Web3j.build(new HttpService("https://sepolia.infura.io/v3/2309bf77660544a0b78cef8a85d33a1f"));
   private final static ReadonlyTransactionManager MANAGER = new ReadonlyTransactionManager(CLIENT, ACCOUNT_ADDRESS);
@@ -38,7 +38,7 @@ public class ReviewSystemReader {
     }
     return jsonReviews;
   }
-  public JSONArray getReviewForAddress(String address, AddressType type) throws Exception {
+  public JSONArray getReviewByAddress(String address, AddressType type) throws Exception {
     requireNonNull(address, "Address cannot be null");
     requireNonNull(type, "Address type cannot be null");
 
@@ -53,10 +53,10 @@ public class ReviewSystemReader {
     ArrayList<Review> reviewArrayList;
     switch (type) {
       case SENDER -> {
-        reviewArrayList = (ArrayList<Review>) CONTRACT.getReviewsForSender(address).sendAsync().get();
+        reviewArrayList = (ArrayList<Review>) CONTRACT.getReviewsBySender(address).sendAsync().get();
       }
       case RECEIVER -> {
-        reviewArrayList = (ArrayList<Review>) CONTRACT.getReviewsForReceiver(address).sendAsync().get();
+        reviewArrayList = (ArrayList<Review>) CONTRACT.getReviewsByReceiver(address).sendAsync().get();
       }
       default -> throw new IllegalStateException("Unexpected address type: " + type);
     }
