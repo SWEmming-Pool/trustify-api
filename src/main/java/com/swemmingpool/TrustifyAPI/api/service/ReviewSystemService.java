@@ -38,7 +38,4 @@ public class ReviewSystemService {
     return CONTRACT.getReviewById(Hex.decode(id.substring(2))).sendAsync().get();
   }
 
-  public String getReviewTitleById(String id) throws ExecutionException, InterruptedException {
-    return CONTRACT.getReviewById(Hex.decode(id.substring(2))).sendAsync().get().title;
-  }
 }

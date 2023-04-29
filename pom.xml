@@ -26,6 +26,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -33,7 +39,8 @@
 			<artifactId>core</artifactId>
 			<version>4.9.7</version>
 		</dependency>
-	</dependencies>
+
+  </dependencies>
 
 	<build>
 		<plugins>
