@@ -9,7 +9,8 @@ import java.util.Date;
 @Component
 public class Mapper {
 
-  public ReviewDTO mapToDTO(Review review) {
+  public ReviewDTO mapToDTO(Object object) {
+    Review review = (Review) object;
     String title = review.title;
     Date date = new Date(review.date.longValue()*1000);
     int rating = review.rating.intValue();
@@ -18,8 +19,5 @@ public class Mapper {
     return new ReviewDTO(title, date, rating, text, transactionId);
   }
 
-  public Object mapToDTO(Object o) {
-    return mapToDTO((Review) o);
-  }
 
 }

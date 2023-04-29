@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -42,5 +40,11 @@ public class ReviewSystemController {
         .stream()
         .map(mapper::mapToDTO)
         .collect(Collectors.toList());
+  }
+
+  @GetMapping("/review/{id}")
+  public ReviewDTO getReviewById(@PathVariable String id)
+      throws ExecutionException, InterruptedException {
+    return mapper.mapToDTO(reviewSystemService.getReviewById(id));
   }
 }
