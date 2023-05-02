@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class Mapper {
+public class ReviewMapper {
 
   public ReviewDTO mapToDTO(Object object) {
     Review review = (Review) object;

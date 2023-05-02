@@ -9,19 +9,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigInteger;
 import java.sql.Date;
-import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class MapperTest {
+class ReviewMapperTest {
 
-  private Mapper mapper;
+  private ReviewMapper reviewMapper;
   private Review review;
 
   @BeforeEach
   void setUp() {
-    mapper = new Mapper();
+    reviewMapper = new ReviewMapper();
     review = new Review(
         "title",
         BigInteger.valueOf(1),
@@ -33,13 +32,13 @@ class MapperTest {
 
   @AfterEach
   void tearDown() {
-    mapper = null;
+    reviewMapper = null;
     review = null;
   }
 
   @Test
   public void mapToDTO() {
-    ReviewDTO reviewDTO = mapper.mapToDTO(review);
+    ReviewDTO reviewDTO = reviewMapper.mapToDTO(review);
     assertEquals(reviewDTO.title(), review.title);
     assertEquals(reviewDTO.date(), new Date(review.date.longValue()*1000));
     assertEquals(reviewDTO.rating(), review.rating.intValue());

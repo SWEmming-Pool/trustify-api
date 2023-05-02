@@ -1,21 +1,12 @@
 package com.swemmingpool.TrustifyAPI.api.controller;
 
-import com.swemmingpool.TrustifyAPI.api.model.Mapper;
 import com.swemmingpool.TrustifyAPI.api.model.ReviewDTO;
-import com.swemmingpool.TrustifyAPI.api.model.ReviewSystem;
-import com.swemmingpool.TrustifyAPI.api.model.ReviewSystem.Review;
-import com.swemmingpool.TrustifyAPI.api.service.ReviewSystemService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.swemmingpool.TrustifyAPI.api.controller;
 
-import com.swemmingpool.TrustifyAPI.api.model.Mapper;
+import com.swemmingpool.TrustifyAPI.api.model.ReviewMapper;
 import com.swemmingpool.TrustifyAPI.api.model.ReviewDTO;
 import com.swemmingpool.TrustifyAPI.api.service.ReviewSystemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 public class ReviewSystemController {
 
   private final ReviewSystemService reviewSystemService;
-  private final Mapper mapper;
+  private final ReviewMapper reviewMapper;
 
   @Autowired
-  public ReviewSystemController(ReviewSystemService reviewSystemService, Mapper mapper) {
+  public ReviewSystemController(ReviewSystemService reviewSystemService, ReviewMapper reviewMapper) {
     this.reviewSystemService = reviewSystemService;
-    this.mapper = mapper;
+    this.reviewMapper = reviewMapper;
   }
 
   @GetMapping("/reviews/{address}")
@@ -29,7 +29,7 @@ public class ReviewSystemController {
       throws ExecutionException, InterruptedException {
     return (List<ReviewDTO>) reviewSystemService.getReviewsByReceiver(address)
         .stream()
-        .map(mapper::mapToDTO)
+        .map(reviewMapper::mapToDTO)
         .collect(Collectors.toList());
   }
 
@@ -38,13 +38,13 @@ public class ReviewSystemController {
       throws ExecutionException, InterruptedException {
     return (List<ReviewDTO>) reviewSystemService.getReviewsBySender(address)
         .stream()
-        .map(mapper::mapToDTO)
+        .map(reviewMapper::mapToDTO)
         .collect(Collectors.toList());
   }
 
   @GetMapping("/review/{id}")
   public ReviewDTO getReviewById(@PathVariable String id)
       throws ExecutionException, InterruptedException {
-    return mapper.mapToDTO(reviewSystemService.getReviewById(id));
+    return reviewMapper.mapToDTO(reviewSystemService.getReviewById(id));
   }
 }
