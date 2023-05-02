@@ -18,7 +18,7 @@ class ReviewDTOTest {
   public void setUp() {
     reviewDTO = new ReviewDTO(
         "title",
-        Date.from(Instant.now()),
+        Date.from(Instant.ofEpochSecond(1)),
         5,
         "text",
         "transactionId"
@@ -37,7 +37,7 @@ class ReviewDTOTest {
 
   @Test
   public void date() {
-    assertEquals(Date.from(Instant.now()), reviewDTO.date());
+    assertEquals(Date.from(Instant.ofEpochSecond(1)), reviewDTO.date());
   }
 
   @Test

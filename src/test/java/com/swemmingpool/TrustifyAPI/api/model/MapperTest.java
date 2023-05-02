@@ -24,7 +24,7 @@ class MapperTest {
     mapper = new Mapper();
     review = new Review(
         "title",
-        BigInteger.valueOf(Instant.now().getEpochSecond()),
+        BigInteger.valueOf(1),
         BigInteger.valueOf(5),
         "text",
         "9221a3c91029530abac06f454be1ef53".getBytes()

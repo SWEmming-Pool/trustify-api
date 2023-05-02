@@ -13,8 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -157,7 +156,7 @@ class ReviewSystemServiceTest {
 
   @Test
   public void getReviewByIdOnEmptyList() throws ExecutionException, InterruptedException {
-    assertEquals(emptyListService.getReviewById("0x0"), null);
+    assertNull(emptyListService.getReviewById("0x0"));
   }
 
   @Test
