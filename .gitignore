@@ -3,7 +3,7 @@ mvnw
 mvnw.cmd
 web3j
 web3j-1.4.2
-src/main/java/com/swemmingpool/contracts/out
+src/main/java/com/swemmingpool/TrustifyAPI/contracts/out
 .mvn/
 target/
 **/src/main/**/target/
