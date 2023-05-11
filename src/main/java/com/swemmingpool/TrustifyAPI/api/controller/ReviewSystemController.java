@@ -24,6 +24,7 @@ public class ReviewSystemController {
     this.reviewMapper = reviewMapper;
   }
 
+  @SuppressWarnings("unchecked")
   @GetMapping("/reviews/{address}")
   public List<ReviewDTO> getReviewsByReceiver(@PathVariable String address)
       throws ExecutionException, InterruptedException {
@@ -33,6 +34,7 @@ public class ReviewSystemController {
         .collect(Collectors.toList());
   }
 
+  @SuppressWarnings("unchecked")
   @GetMapping("/reviews/sender/{address}")
   public List<ReviewDTO> getReviewsBySender(@PathVariable String address)
       throws ExecutionException, InterruptedException {
