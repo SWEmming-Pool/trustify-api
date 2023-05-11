@@ -1,11 +1,13 @@
 package com.swemmingpool.TrustifyAPI.api.service;
 
+import com.swemmingpool.TrustifyAPI.api.model.ReviewSystem;
 import com.swemmingpool.TrustifyAPI.api.model.ReviewSystem.Review;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigInteger;
@@ -22,10 +24,13 @@ class ReviewSystemServiceTest {
   private static List validList;
   private static List emptyList;
 
+  @Autowired
+  private ReviewSystem contract;
+
   private ReviewSystemService validListService;
   private ReviewSystemService emptyListService;
 
-  private ReviewSystemService normalService;
+  private static ReviewSystemService normalService;
 
   @BeforeAll
   public static void setUpAll() {
@@ -93,7 +98,7 @@ class ReviewSystemServiceTest {
     when(validListService.getReviewsBySender("0x0")).thenReturn(validList);
     when(validListService.getReviewById("0x0")).thenReturn((Review) validList.get(0));
 
-    normalService = new ReviewSystemService();
+    normalService = new ReviewSystemService(contract);
   }
 
   @AfterEach
@@ -161,16 +166,37 @@ class ReviewSystemServiceTest {
 
   @Test
   public void getReviewsByReceiverOnValidAddress() throws ExecutionException, InterruptedException {
-    assertEquals(validListService.getReviewsByReceiver("0x0").size(), 5);
+    assertEquals(
+        normalService.getReviewsByReceiver("0x0000000000000000000000000000000000000000").size(),
+        0);
   }
 
   @Test
   public void getReviewsBySenderOnValidAddress() throws ExecutionException, InterruptedException {
-    assertEquals(validListService.getReviewsBySender("0x0").size(), 5);
+    assertEquals(
+        normalService.getReviewsBySender("0x0000000000000000000000000000000000000000").size(),
+        0);
   }
 
   @Test
   public void getReviewByIdOnValidId() throws ExecutionException, InterruptedException {
+    assertEquals(
+        normalService.getReviewById("0x0000000000000000000000000000000000000000000000000000000000000000").title,
+        "");
+  }
+
+  @Test
+  public void getReviewsByReceiverOnValidList() throws ExecutionException, InterruptedException {
+    assertEquals(validListService.getReviewsByReceiver("0x0").size(), 5);
+  }
+
+  @Test
+  public void getReviewsBySenderOnValidList() throws ExecutionException, InterruptedException {
+    assertEquals(validListService.getReviewsBySender("0x0").size(), 5);
+  }
+
+  @Test
+  public void getReviewByIdOnValidReview() throws ExecutionException, InterruptedException {
     assertEquals(validListService.getReviewById("0x0"), validList.get(0));
   }
 
